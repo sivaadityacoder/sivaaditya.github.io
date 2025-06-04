@@ -1,88 +1,76 @@
-/* Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Courier New', Courier, monospace;
-}
-
 body {
-  background-color: #0d0d0d;
+  background-color: #0f0f0f;
   color: #33ff33;
-  height: 100vh;
+  font-family: 'Courier New', monospace;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
 }
 
 a {
   color: #33ff33;
-  text-decoration: none;
-  transition: color 0.3s;
+  text-decoration: underline;
 }
 a:hover {
   color: #00ff00;
 }
 
-/* Terminal Box */
 .terminal {
-  background-color: #000000;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 600px;
+  background-color: rgba(0, 0, 0, 0.95);
+  border-radius: 6px;
+  width: 650px;
   box-shadow: 0 0 20px #00ff00;
-  padding: 1rem;
+  overflow: hidden;
 }
 
-.header {
+.terminal-header {
   display: flex;
-  gap: 5px;
-  margin-bottom: 1rem;
+  align-items: center;
+  padding: 10px;
+  background-color: #111;
+  border-bottom: 1px solid #333;
 }
 
-.dot {
-  width: 12px;
+.btn {
   height: 12px;
+  width: 12px;
   border-radius: 50%;
-  display: inline-block;
+  margin-right: 5px;
 }
-.red { background: #ff605c; }
-.yellow { background: #ffbd44; }
-.green { background: #00ca4e; }
+.red { background-color: #ff5f56; }
+.yellow { background-color: #ffbd2e; }
+.green { background-color: #27c93f; }
 
-.content h1 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+.title {
+  margin-left: 10px;
+  color: #888;
+  font-size: 0.9em;
+}
+
+.terminal-body {
+  padding: 20px;
+  font-size: 1rem;
+  animation: fadeIn 1.5s ease-in;
 }
 
 .prompt {
   color: #00ff00;
 }
 
-.typewriter {
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 2px solid #33ff33;
-  width: 0;
-  animation: typing 3s steps(40, end) forwards, blink 0.75s step-end infinite;
-  margin-bottom: 1rem;
+.highlight {
+  color: #00ffff;
+  font-weight: bold;
 }
 
-ul {
-  list-style: none;
-  margin-top: 1rem;
-}
-ul li {
-  margin-bottom: 0.5rem;
+.section {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px dashed #33ff33;
 }
 
-/* Animations */
-@keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-@keyframes blink {
-  from, to { border-color: transparent; }
-  50% { border-color: #33ff33; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
