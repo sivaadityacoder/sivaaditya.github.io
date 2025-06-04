@@ -1,0 +1,88 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+body {
+  background-color: #0d0d0d;
+  color: #33ff33;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  color: #33ff33;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+a:hover {
+  color: #00ff00;
+}
+
+/* Terminal Box */
+.terminal {
+  background-color: #000000;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 0 20px #00ff00;
+  padding: 1rem;
+}
+
+.header {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 1rem;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.red { background: #ff605c; }
+.yellow { background: #ffbd44; }
+.green { background: #00ca4e; }
+
+.content h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.prompt {
+  color: #00ff00;
+}
+
+.typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #33ff33;
+  width: 0;
+  animation: typing 3s steps(40, end) forwards, blink 0.75s step-end infinite;
+  margin-bottom: 1rem;
+}
+
+ul {
+  list-style: none;
+  margin-top: 1rem;
+}
+ul li {
+  margin-bottom: 0.5rem;
+}
+
+/* Animations */
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  from, to { border-color: transparent; }
+  50% { border-color: #33ff33; }
+}
