@@ -1,30 +1,324 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Hacker Portfolio</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="terminal">
-    <div class="terminal-header">
-      <span class="btn red"></span>
-      <span class="btn yellow"></span>
-      <span class="btn green"></span>
-      <span class="title">root@localhost:~</span>
-    </div>
-    <div class="terminal-body">
-      <p><span class="prompt">root@hacker:</span>~$ Hello, I’m <span class="highlight">Aditya</span></p>
-      <p><span class="prompt">root@hacker:</span>~$ I build code and break systems 🔓</p>
-      <p><span class="prompt">root@hacker:</span>~$ <a href="#projects">ls ~/projects</a></p>
-      <p><span class="prompt">root@hacker:</span>~$ <a href="resume.pdf" target="_blank">cat resume.pdf</a></p>
-      <p><span class="prompt">root@hacker:</span>~$ <a href="mailto:youremail@example.com">mail me</a></p>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sivaaditya P - Ethical Hacker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --main-color: #00ff41;
+            --bg-color: #000;
+            --border-color: rgba(0, 255, 65, 0.3);
+        }
 
-      <div id="projects" class="section">
-        <p><span class="prompt">project-01:</span> Hacker Portfolio Site</p>
-        <p><span class="prompt">project-02:</span> Terminal UI with HTML/CSS</p>
-      </div>
-    </div>
-  </div>
+        body {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bg-color);
+            color: var(--main-color);
+            text-shadow: 0 0 5px var(--main-color), 0 0 10px var(--main-color);
+            overflow-x: hidden;
+        }
+
+        /* Scanline effect */
+        body::after {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 2px, 3px 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .terminal-window {
+            border: 1px solid var(--border-color);
+            background: rgba(0, 255, 65, 0.05);
+            box-shadow: 0 0 15px var(--border-color);
+            backdrop-filter: blur(2px);
+            transition: all 0.3s ease;
+        }
+        .terminal-window:hover {
+            background: rgba(0, 255, 65, 0.1);
+            box-shadow: 0 0 25px var(--border-color);
+        }
+
+        .terminal-header {
+            background: var(--border-color);
+            padding: 4px 8px;
+            font-weight: bold;
+            color: var(--bg-color);
+            text-shadow: none;
+        }
+
+        .glitch {
+            font-size: 4rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            position: relative;
+            text-shadow: 0.05em 0 0 rgba(255,0,0,.75),
+                        -0.025em -0.05em 0 rgba(0,255,0,.75),
+                        0.025em 0.05em 0 rgba(0,0,255,.75);
+            animation: glitch 500ms infinite;
+        }
+
+        .glitch span { display: block; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg-color); }
+        .glitch span:first-child {
+            animation: glitch 650ms infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+            transform: translate(-0.025em, -0.0125em);
+            opacity: .8;
+        }
+        .glitch span:last-child {
+            animation: glitch 375ms infinite;
+            clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+            transform: translate(0.0125em, 0.025em);
+            opacity: .8;
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 0.05em 0 0 rgba(255,0,0,.75), -0.05em -0.025em 0 rgba(0,255,0,.75), -0.025em 0.05em 0 rgba(0,0,255,.75); }
+            14% { text-shadow: 0.05em 0 0 rgba(255,0,0,.75), -0.05em -0.025em 0 rgba(0,255,0,.75), -0.025em 0.05em 0 rgba(0,0,255,.75); }
+            15% { text-shadow: -0.05em -0.025em 0 rgba(255,0,0,.75), 0.025em 0.025em 0 rgba(0,255,0,.75), -0.05em -0.05em 0 rgba(0,0,255,.75); }
+            49% { text-shadow: -0.05em -0.025em 0 rgba(255,0,0,.75), 0.025em 0.025em 0 rgba(0,255,0,.75), -0.05em -0.05em 0 rgba(0,0,255,.75); }
+            50% { text-shadow: 0.025em 0.05em 0 rgba(255,0,0,.75), 0.05em 0 0 rgba(0,255,0,.75), 0 -0.05em 0 rgba(0,0,255,.75); }
+            99% { text-shadow: 0.025em 0.05em 0 rgba(255,0,0,.75), 0.05em 0 0 rgba(0,255,0,.75), 0 -0.05em 0 rgba(0,0,255,.75); }
+            100% { text-shadow: -0.025em 0 0 rgba(255,0,0,.75), -0.025em -0.025em 0 rgba(0,255,0,.75), -0.025em -0.05em 0 rgba(0,0,255,.75); }
+        }
+        
+        .typing-cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2rem;
+            background-color: var(--main-color);
+            animation: blink 1s step-end infinite;
+            box-shadow: 0 0 5px var(--main-color);
+        }
+        @keyframes blink {
+            from, to { background-color: transparent }
+            50% { background-color: var(--main-color); }
+        }
+
+        .section-title {
+            display: inline-block;
+            border-bottom: 2px solid var(--main-color);
+            padding-bottom: 5px;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+        
+        .skill-tag {
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            margin: 4px;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+        .skill-tag:hover {
+            background-color: var(--main-color);
+            color: var(--bg-color);
+            text-shadow: none;
+        }
+
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <header class="text-center mb-16">
+        <div id="boot-sequence" class="text-left max-w-2xl mx-auto mb-8 h-24"></div>
+        <h1 class="glitch" data-text="Sivaaditya P">Sivaaditya P<span>Sivaaditya P</span><span>Sivaaditya P</span></h1>
+        <p class="mt-4 text-xl">Ethical Hacker & Security Researcher</p>
+    </header>
+
+    <main class="container mx-auto max-w-6xl space-y-16">
+        
+        <!-- About Section -->
+        <section id="about" class="terminal-window">
+            <div class="terminal-header">root@sivaaditya:~/about_me</div>
+            <div class="p-6">
+                <p id="summary"></p>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience">
+            <h2 class="text-3xl font-bold section-title">./experience.sh</h2>
+            <div id="experience-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2 class="text-3xl font-bold section-title">ls -R /projects</h2>
+            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        </section>
+        
+        <!-- Skills & Certifications -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <!-- Skills Section -->
+            <section id="skills">
+                <h2 class="text-3xl font-bold section-title">cat /dev/skills</h2>
+                <div id="skills-container" class="flex flex-wrap"></div>
+            </section>
+
+            <!-- Certifications Section -->
+            <section id="certifications">
+                <h2 class="text-3xl font-bold section-title">grep -i "CERTIFIED" /var/log/auth.log</h2>
+                <ul id="certifications-list" class="list-none space-y-4"></ul>
+            </section>
+        </div>
+
+    </main>
+
+    <footer class="text-center mt-16 pt-8 border-t border-dashed border-gray-700">
+        <p>Contact: <a href="mailto:sivaaditya456@gmail.com" class="hover:underline">sivaaditya456@gmail.com</a> | <a href="https://linkedin.com/in/siva-aditya-b67484316" target="_blank" class="hover:underline">LinkedIn</a></p>
+        <p class="mt-4 text-sm text-gray-500">Session terminated. Have a secure day.</p>
+    </footer>
+
+    <script>
+        const portfolioData = {
+            summary: "Aspiring Ethical Hacker with hands-on experience in malware analysis from an internship at AGRATAS EDUTECH. Proficient in analyzing and reverse-engineering malicious software to develop actionable threat mitigations. Seeking an Ethical Hacker position to apply and enhance skills in cybersecurity and threat analysis to protect digital landscapes.",
+            experience: [
+                {
+                    title: "Security Researcher",
+                    company: "bugcrowd",
+                    period: "Jan 2025 - Jun 2025",
+                    location: "Remote",
+                    description: "Devised and executed vulnerability assessments on diverse client applications, identifying security flaws. Collaborated with engineering teams to implement remediation efforts based on organizational risk profiles."
+                },
+                {
+                    title: "Malware Analysis Intern",
+                    company: "AGRATAS EDUTECH",
+                    period: "Feb 2025 - Apr 2025",
+                    location: "Hyderabad",
+                    description: "Analyzed and reverse-engineered malicious software samples to identify threat vectors. Documented behavioral patterns and contributed to developing actionable mitigations for client platforms."
+                }
+            ],
+            projects: [
+                {
+                    title: "XSS & SQL Automation Tool",
+                    description: "A Python-Flask web security scanner that automates the detection of XSS and SQL Injection vulnerabilities.",
+                    link: "https://github.com/sivaadityacoder/xss-sql-automation"
+                },
+                {
+                    title: "Satellite OSINT Tracker",
+                    description: "A tool for cybersecurity researchers and OSINT analysts to simulate overhead reconnaissance and visualize satellite behavior.",
+                    link: "https://github.com/sivaadityacoder/satellite-osint-tracking"
+                },
+                {
+                    title: "Realistic Web App Pentest",
+                    description: "Conducted end-to-end web application penetration testing in a self-hosted lab (DVWA, Juice Shop), focusing on OWASP Top 10 vulnerabilities.",
+                    link: "#"
+                },
+                {
+                    title: "AD Attack Simulation Lab",
+                    description: "Engineered a lab to simulate Active Directory attacks for security training and incident response practice.",
+                    link: "#"
+                },
+                {
+                    title: "vulnhunt-lite",
+                    description: "A Python-based vulnerability scanner that integrates CVE detection, exploit mapping, and Nmap scanning.",
+                    link: "https://github.com/sivaadityacoder/vulnhunt-lite"
+                },
+                {
+                    title: "Custom CVE Exploit (POC)",
+                    description: "Developed a Python-based proof-of-concept exploit for a known CVE in a controlled lab environment.",
+                    link: "#"
+                }
+            ],
+            skills: [
+                "Bug Hunting", "CTF Challenges", "Web Security", "HTML", "JavaScript", "SQL Injection", "Penetration Testing", "Python", "Exploit Development", "CVE Analysis", "Malware Analysis", "OSINT", "Active Directory Security"
+            ],
+            certifications: [
+                { name: "Ethical Hacker", issuer: "Cisco Networking Academy", year: "2025" },
+                { name: "Linux Unhatched", issuer: "Cisco Networking Academy", year: "2025" },
+                { name: "API Penetration Testing", issuer: "APIsec University", year: "2025" },
+                { name: "Jr Penetration Tester", issuer: "TryHackMe", year: "2024" },
+                { name: "Dark Web & Anonymity", issuer: "EC-Council", year: "2024" }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Boot sequence animation
+            const bootSequenceEl = document.getElementById('boot-sequence');
+            const lines = [
+                'Booting SivaOS v1.3.3.7...',
+                'Connecting to network...',
+                'Connection established.',
+                'Authenticating user: root...',
+                'Access granted. Welcome, Sivaaditya.',
+            ];
+            let lineIndex = 0;
+            let charIndex = 0;
+            
+            function typeLine() {
+                if (lineIndex < lines.length) {
+                    if (charIndex < lines[lineIndex].length) {
+                        bootSequenceEl.innerHTML = lines.slice(0, lineIndex).join('<br>') + '<br>' + lines[lineIndex].substring(0, charIndex + 1) + '<span class="typing-cursor"></span>';
+                        charIndex++;
+                        setTimeout(typeLine, 30);
+                    } else {
+                        charIndex = 0;
+                        lineIndex++;
+                        setTimeout(typeLine, 500);
+                    }
+                } else {
+                     bootSequenceEl.innerHTML = lines.join('<br>');
+                }
+            }
+            typeLine();
+
+            // Populate content
+            document.getElementById('summary').textContent = portfolioData.summary;
+
+            const experienceGrid = document.getElementById('experience-grid');
+            portfolioData.experience.forEach(exp => {
+                const card = document.createElement('div');
+                card.className = 'terminal-window';
+                card.innerHTML = `
+                    <div class="terminal-header">${exp.company}</div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold">${exp.title}</h3>
+                        <p class="text-sm opacity-70 mb-2">${exp.period} | ${exp.location}</p>
+                        <p>${exp.description}</p>
+                    </div>
+                `;
+                experienceGrid.appendChild(card);
+            });
+
+            const projectsGrid = document.getElementById('projects-grid');
+            portfolioData.projects.forEach(proj => {
+                const card = document.createElement('div');
+                card.className = 'terminal-window p-6 flex flex-col';
+                card.innerHTML = `
+                    <h3 class="text-xl font-bold mb-2 flex-grow">${proj.title}</h3>
+                    <p class="opacity-80 mb-4 flex-grow">${proj.description}</p>
+                    <a href="${proj.link}" target="_blank" class="self-start hover:underline">cat README.md &gt;</a>
+                `;
+                projectsGrid.appendChild(card);
+            });
+
+            const skillsContainer = document.getElementById('skills-container');
+            portfolioData.skills.forEach(skill => {
+                const tag = document.createElement('span');
+                tag.className = 'skill-tag';
+                tag.textContent = skill;
+                skillsContainer.appendChild(tag);
+            });
+
+            const certsList = document.getElementById('certifications-list');
+            portfolioData.certifications.forEach(cert => {
+                const item = document.createElement('li');
+                item.innerHTML = `> <span class="font-bold">${cert.name}</span> - ${cert.issuer} (${cert.year})`;
+                certsList.appendChild(item);
+            });
+        });
+    </script>
 </body>
 </html>
